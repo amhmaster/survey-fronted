@@ -24,7 +24,9 @@ jobs:
         aws configure set default.region $AWS_DEFAULT_REGION
 
     - name: Login to Amazon ECR
-      run: aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REGISTRY_URL # Replace <YOUR_REGION> with your AWS region
+      run: |
+        aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REGISTRY_URL # Replace <YOUR_REGION> with your AWS region
+        aws ecr create-repository --repository-name survey-frontend #create repository
 
 
     # - name: Login to Amazon ECR
